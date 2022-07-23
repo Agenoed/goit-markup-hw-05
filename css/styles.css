@@ -23,6 +23,9 @@ body {
   color: var(--main-txt-clr);
   letter-spacing: 0.03em;
 }
+.no-scroll {
+  overflow: hidden;
+}
 /* reset styles */
 .link {
   text-decoration: none;
@@ -82,6 +85,72 @@ p {
   flex-basis: calc((100% - var(--indent) * (var(--items) - 1)) / var(--items));
 }
 /* END Card set */
+
+/* Modal window */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: initial;
+  transition: opacity 250ms var(--timing-function), visibility 250ms var(--timing-function);
+}
+.modal {
+  position: relative;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(1turn) scale(1);
+
+  width: 528px;
+  height: 581px;
+
+  background-color: #ffffff;
+
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  opacity: 1;
+
+  transition: transform 400ms var(--timing-function), opacity 250ms var(--timing-function),
+    scale 250ms var(--timing-function);
+}
+.modal-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  cursor: pointer;
+
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) rotate(0) scale(0);
+  opacity: 0;
+}
+/* END Modal window */
 
 /* =========HEADER========= */
 .header {
@@ -474,11 +543,6 @@ p {
 
   overflow: hidden;
 }
-.work-list-link:hover,
-.work-list-link:focus {
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-    1px 4px 6px rgba(0, 0, 0, 0.16);
-}
 
 .work-list-content {
   position: relative;
@@ -533,7 +597,13 @@ p {
 
   color: var(--light-txt-clr);
 }
-.work-list-link:hover .work-list-overlay {
+.work-list-link:hover,
+.work-list-link:focus {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+.work-list-link:hover .work-list-overlay,
+.work-list-link:focus .work-list-overlay {
   transform: translateY(0);
 }
 /* =========END PORTFOLIO========= */
